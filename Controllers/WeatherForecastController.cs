@@ -110,23 +110,6 @@ namespace core.Controllers
             return result;
         }
 
-        //[HttpPost]
-        //public HttpResponseMessage Post([FromBody] string DATA)
-        //{
-        //    string controllerName = ControllerContext.RouteData.Values["controller"].ToString();
-
-        //    JObject jo = JObject.Parse(DATA);
-
-        //    string l_type = jo["TYPE"].ToString();
-        //    string param1 = jo["PARAM1"].ToString();
-
-        //    var result = new
-        //    {
-        //        STATUS = true,
-        //        MSG = "成功",
-        //    };
-
-        //    return Request.CreateResponse(HttpStatusCode.OK, result);
-        //}
+        
     }
 }
