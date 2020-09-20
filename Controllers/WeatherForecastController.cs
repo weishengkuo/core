@@ -118,7 +118,7 @@ namespace core.Controllers
 
         public static personInformation GetData(string name = null ,string nickname = null, string phonenumber = null, string interest = null, string job = null)
         {
-            //var list = new List<personInformation>();
+            var list = new List<personInformation>();
             var result = new personInformation();
 
             result.name = name;
