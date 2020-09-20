@@ -91,27 +91,7 @@ namespace core.Controllers
                 },
             };
 
-            /*
-            var result = new personInformation();
-
-            list.Add(GetData(result.name = "王小明"));
-            list.Add(GetData(result.nickName = "Mike"));
-            list.Add(GetData(result.phoneNumber = "0982335675"));
-            list.Add(GetData(result.interesting = "籃球"));
-            list.Add(GetData(result.jobTitle = "業務員"));
-
-            list.Add(GetData(result.name = "孫小美"));
-            list.Add(GetData(result.nickName = "Jane"));
-            list.Add(GetData(result.phoneNumber = "0922367885"));
-            list.Add(GetData(result.interesting = "瑜珈"));
-            list.Add(GetData(result.jobTitle = "行政人員"));
-
-            list.Add(GetData(result.name = "劉大鵬"));
-            list.Add(GetData(result.nickName = "Anderson"));
-            list.Add(GetData(result.phoneNumber = "0928576882"));
-            list.Add(GetData(result.interesting = "桌球"));
-            list.Add(GetData(result.jobTitle = "居家裝潢"));
-            */
+           
 
             return list;
         }
