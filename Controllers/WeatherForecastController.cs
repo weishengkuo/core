@@ -22,7 +22,7 @@ namespace core.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        private personInformation data { get; set; }
+        private PersonInformation data { get; set; }
 
         /// <summary>
         /// 
@@ -31,30 +31,30 @@ namespace core.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            data = new personInformation() { 
+            data = new PersonInformation() { 
             };
         }
 
         [HttpGet]
-        public IEnumerable<personInformation> Get()
+        public IEnumerable<PersonInformation> Get()
         {
-            List<personInformation> list = new List<personInformation>
+            List<PersonInformation> list = new List<PersonInformation>
             {
-                new personInformation()
+                new PersonInformation()
                 {
-                    name = "王小明",
-                    nickName = "Mike",
-                    phoneNumber = "0982335675",
-                    interesting = "籃球",
-                    jobTitle = "業務員"
+                    Name = "王小明",
+                    NickName = "Mike",
+                    PhoneNumber = "0982335675",
+                    //Interesting = "籃球",
+                    JobTitle = "業務員"
                 },
-               new personInformation()
+               new PersonInformation()
                 {
-                    name = "孫小美",
-                    nickName = "Jane",
-                    phoneNumber = "0922367885",
-                    interesting = "瑜珈",
-                    jobTitle = "行政人員"
+                    Name = "孫小美",
+                    NickName = "Jane",
+                    PhoneNumber = "0922367885",
+                    //Interesting = "瑜珈",
+                    JobTitle = "行政人員"
                 },
             };
 
@@ -65,51 +65,32 @@ namespace core.Controllers
         }
 
         [HttpPost]
-        public IEnumerable<personInformation> Post(string data)
+        public IEnumerable<PersonInformation> Post(string data)
         {
-            Console.WriteLine(data);
-
-
-
-            List<personInformation> list = new List<personInformation>
+            
+            List<PersonInformation> list = new List<PersonInformation>
             {
-                new personInformation()
+                new PersonInformation()
                 {
-                    name = "王小明",
-                    nickName = "Mike",
-                    phoneNumber = "0982335675",
-                    interesting = "籃球",
-                    jobTitle = "業務員"
+                    Name = "王小明",
+                    NickName = "Mike",
+                    PhoneNumber = "0982335675",
+                    Address = "台北市新店區九龍街251號3樓之一號",
+                    //Interesting = "籃球",
+                    JobTitle = "業務員"
                 },
-               new personInformation()
+               new PersonInformation()
                 {
-                    name = "孫小美",
-                    nickName = "Jane",
-                    phoneNumber = "0922367885",
-                    interesting = "瑜珈",
-                    jobTitle = "行政人員"
+                    Name = "孫小美",
+                    NickName = "Jane",
+                    PhoneNumber = "0922367885",
+                    //Interesting = "瑜珈",
+                    JobTitle = "行政人員"
                 },
             };
-
-           
-
+            
             return list;
         }
-
-        public static personInformation GetData(string name = null ,string nickname = null, string phonenumber = null, string interest = null, string job = null)
-        {
-            var list = new List<personInformation>();
-            var result = new personInformation();
-
-            result.name = name;
-            result.nickName = nickname;
-            result.phoneNumber = phonenumber;
-            result.interesting = interest;
-            result.jobTitle = job;
-            
-            return result;
-        }
-
-        
+       
     }
 }
