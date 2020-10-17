@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace core.Models
 {
-    public class PersonInformation
+    public class PersonInforDetail
     {
-        public int PersonID { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } 
 
@@ -16,7 +16,9 @@ namespace core.Models
         public string PhoneNumber { get; set; }
 
         public string Address { get; set; }
-        
+
+        public string Interesting{ get; set; }
+
         public string JobTitle { get; set; }
     }
 }
