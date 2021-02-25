@@ -1,0 +1,119 @@
+﻿
+@model WorkScheduleSystem.Models.ShiftMaintainIndexModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/bootstrap-clockpicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-clockpicker.min.js"></script>
+</head>
+
+<div>
+    <h2>班別資料修改</h2>
+    @if (TempData["ResultMessage"] != null)
+    {
+        <script type="text/javascript">
+            var message = @Html.Raw(Json.Encode(TempData["ResultMessage"]));
+            alert(message);
+        </script>
+    }
+
+    <form method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">部門</label>
+            <div class="col-sm-10">
+                @*@Html.TextBoxFor(c => c.depName, new { @disabled = "disabled" })*@
+                @Html.DropDownListFor(c => c.depID, (List<SelectListItem>)ViewData["Department"], "請選擇")
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">班別：</label>
+            <div class="col-sm-3">
+                @*@Html.TextBoxFor(c => c.shiftTypeName, new { @disabled = "disabled" })*@
+                @Html.DropDownListFor(c => c.shiftTypeCategoryID, (List<SelectListItem>)ViewData["ShiftType"], "請選擇")
+            </div>
+        </div>
+
+        <div class="form-group row clockpicker">
+            <label class="col-sm-2 col-form-label">起始時間：</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.startTime)
+            </div>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+
+        <div class="form-group row clockpicker">
+            <label class="col-sm-2 col-form-label">結束時間：</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.endTime)
+            </div>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">工作時間:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.workhour)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">休息時間:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.resthour)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">啟用狀態</label>
+            <div class="form-group">
+                @Html.RadioButtonFor(c => c.status, "已啟用", new { @id = "enStatus" })啟用
+                @Html.RadioButtonFor(c => c.status, "未啟用", new { @id = "unStatus" })未啟用
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">送出</button>
+
+    </form>
+</div>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            $('.clockpicker').clockpicker();
+
+            //var userTypeid = $('[name = userTypeID').val();
+
+            //if (userTypeid == 1) {
+
+            //    $('#shift').show();
+            //    $('#noteBoard').show();
+            //    $('#note').show();
+            //    $('#dep').show();
+            //    $('#admin').show();
+            //    $('#shiftmaintain').show();
+            //    $('#shiftType').show();
+            //}
+            //else {
+            //    $('#shift').show();
+            //    $('#noteBoard').show();
+            //    $('#note').hide();
+            //    $('#dep').hide();
+            //    $('#admin').hide();
+            //    $('#shiftmaintain').hide();
+            //    $('#shiftType').hide();
+            //}
+
+        });
+
+    </script>
+}

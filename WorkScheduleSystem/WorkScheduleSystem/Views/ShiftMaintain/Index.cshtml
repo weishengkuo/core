@@ -1,0 +1,148 @@
+﻿
+@model WorkScheduleSystem.Models.ShiftMaintainViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/bootstrap-clockpicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-clockpicker.min.js"></script>
+</head>
+
+<div>
+    <h2>班別資料新增</h2>
+    @if (TempData["ResultMessage"] != null)
+    {
+        <script type="text/javascript">
+            var message = @Html.Raw(Json.Encode(TempData["ResultMessage"]));
+            alert(message);
+        </script>
+    }
+
+    @if (TempData["DepShiftData"] != null)
+    {
+        <script type="text/javascript">
+            var message = @Html.Raw(Json.Encode(TempData["DepShiftData"]));
+            alert(message);
+        </script>
+    }
+
+    <form method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">部門：</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(c => c.depID, (List<SelectListItem>)ViewData["Department"], "請選擇")
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">班別：</label>
+            <div class="col-sm-3">
+                @Html.DropDownListFor(c => c.shiftTypeID, (List<SelectListItem>)ViewData["ShiftType"], "請選擇")
+            </div>
+        </div>
+
+        <div class="form-group row clockpicker">
+            <label class="col-2 col-form-label">起始時間：</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.startTime)
+            </div>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+
+        <div class="form-group row clockpicker">
+            <label class="col-sm-2 col-form-label">結束時間：</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.endTime)
+            </div>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">工作時間:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.workhour)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">休息時間:</label>
+            <div class="col-sm-3">
+                @Html.TextBoxFor(c => c.resthour)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">啟用狀態</label>
+            <div class="form-group col-sm-3">
+                @Html.RadioButtonFor(c => c.status, true, new { @id = "enStatus" })啟用
+                @Html.RadioButtonFor(c => c.status, false, new { @id = "unStatus" })未啟用
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">送出</button>
+
+    </form>
+</div>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('.clockpicker').clockpicker();
+
+            $('[name = startTime]').change(function () {
+
+                var startTime = $('[name = startTime]').val();
+                var endtime = $('[name = endTime]').val();
+
+                if (startTime != "" && endtime != "") {
+                    TotalHours(startTime, endtime);
+                }
+                
+            })
+
+            $('[name = endTime]').change(function () {
+
+                var startTime = $('[name = startTime]').val();
+                var endtime = $('[name = endTime]').val();
+
+                if (startTime != "" && endtime != "") {
+                    TotalHours(startTime, endtime);
+                }
+            })
+
+        });
+
+        function TotalHours(startTime, endTime) {
+
+             $.ajax({
+                    url: `@Url.Action("WorkHours", "ShiftMaintain")`,
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ startTime: startTime, endTime: endTime }),
+                    success: function (result) {
+
+                        console.log(result);
+
+                        if (result != null) {
+
+                            $('[name = workhour]').val(result);
+                        }
+
+                   },
+
+             });
+        }
+    </script>
+}
+
+

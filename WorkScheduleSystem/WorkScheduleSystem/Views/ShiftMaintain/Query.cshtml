@@ -1,0 +1,97 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IEnumerable<WorkScheduleSystem.Models.ShiftMaintainIndexModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<div>
+    <h2>班別資料維護</h2>
+    <form method="post">
+        <div class="row">
+            <div class="col">
+                <label class="col-sm-2 col-form-label">部門名稱</label>
+                @Html.DropDownListFor(c => Model.FirstOrDefault().SearchModel.depId, (List<SelectListItem>)ViewData["Department"], "請選擇")
+            </div>
+            <div class="col">
+                <label class="col-sm-2 col-form-label">班別</label>
+                @Html.DropDownListFor(c => Model.FirstOrDefault().SearchModel.shiftTypeCategoryId, (List<SelectListItem>)ViewData["ShiftType"], "請選擇")
+            </div>
+        </div>
+
+        <div style="float:left">@Html.ActionLink("增加", "Index", "ShiftMaintain", new { } ,new { @class = "btn btn-primary" })</div>
+        <button type="submit" class="btn btn-primary" style="float:right">查詢</button>
+
+        <table class="table" id="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">部門編號</th>
+                    <th scope="col">部門名稱</th>
+                    <th scope="col">班別</th>
+                    <th scope="col">上班時間</th>
+                    <th scope="col">下班時間</th>
+                    <th scope="col">總時數</th>
+                    <th scope="col">休息時數</th>
+                    <th scope="col">啟用狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("編輯", "Edit", "ShiftMaintain", new { id = item.id }, new { @class = "btn btn-primary" })
+                        </td>
+                        <td>@item.depID</td>
+                        <td>@item.depName</td>
+                        <td>@item.shiftTypeName</td>
+                        <td>@item.startTime</td>
+                        <td>@item.endTime</td>
+                        <td>@item.workhour</td>
+                        <td>@item.resthour</td>
+                        <td>@item.status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.PagedListPager((IPagedList)Model, x => Url.Action("Query", new { page = x }))
+    </form>
+</div>
+
+@section scripts{
+
+    <script>
+
+        $(document).ready(function () {
+
+            //var userTypeid = $('[name = userTypeID').val();
+
+            //if (userTypeid == 1) {
+
+            //    $('#shift').show();
+            //    $('#noteBoard').show();
+            //    $('#note').show();
+            //    $('#dep').show();
+            //    $('#admin').show();
+            //    $('#shiftmaintain').show();
+            //    $('#shiftType').show();
+            //}
+            //else {
+            //    $('#shift').show();
+            //    $('#noteBoard').show();
+            //    $('#note').hide();
+            //    $('#dep').hide();
+            //    $('#admin').hide();
+            //    $('#shiftmaintain').hide();
+            //    $('#shiftType').hide();
+            //}
+        });
+
+    </script>
+}
