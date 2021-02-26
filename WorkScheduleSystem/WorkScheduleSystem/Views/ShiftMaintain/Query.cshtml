@@ -12,6 +12,14 @@
 
 <div>
     <h2>班別資料維護</h2>
+    @if (TempData["DelMessage"] != null)
+    {
+        <script type="text/javascript">
+            var message = @Html.Raw(Json.Encode(TempData["DelMessage"]));
+            alert(message);
+        </script>
+    }
+
     <form method="post">
         <div class="row">
             <div class="col">
@@ -24,7 +32,7 @@
             </div>
         </div>
 
-        <div style="float:left">@Html.ActionLink("增加", "Index", "ShiftMaintain", new { } ,new { @class = "btn btn-primary" })</div>
+        <div style="float:left">@Html.ActionLink("增加", "Index", "ShiftMaintain", new { }, new { @class = "btn btn-primary" })</div>
         <button type="submit" class="btn btn-primary" style="float:right">查詢</button>
 
         <table class="table" id="table">
@@ -39,6 +47,7 @@
                     <th scope="col">總時數</th>
                     <th scope="col">休息時數</th>
                     <th scope="col">啟用狀態</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -56,6 +65,9 @@
                         <td>@item.workhour</td>
                         <td>@item.resthour</td>
                         <td>@item.status</td>
+                        <td>
+                            @Html.ActionLink("刪除", "Delete", "ShiftMaintain", new { id = item.id }, new { @class = "btn btn-primary" })
+                        </td>
                     </tr>
                 }
             </tbody>
