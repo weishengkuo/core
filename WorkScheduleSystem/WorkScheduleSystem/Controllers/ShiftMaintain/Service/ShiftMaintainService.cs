@@ -104,9 +104,20 @@ namespace WorkScheduleSystem.Controllers
                 depshiftTypeParameter.status = data.status == "已啟用" ? true : false;
                 depshiftTypeParameter.workhour = data.workhour;
                 depshiftTypeParameter.resthour = data.resthour;
+
                 result = SimpleFactory.CreateInstance().Update<DepShiftTypeParameterModel>(depshiftTypeParameter);
                
             }
+
+            return result;
+        }
+        public bool DelDepShiftTypeParameter(int id)
+        {
+            bool result = false;
+
+            DepShiftTypeParameterModel depshift = depshiftTypeParameter.FirstOrDefault(c => c.Id == id);
+
+            result = SimpleFactory.CreateInstance().Delete<DepShiftTypeParameterModel>(depshift);
 
             return result;
         }

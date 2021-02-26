@@ -106,6 +106,17 @@ namespace WorkScheduleSystem.Controllers
 
             return View(result);
         }
+        public ActionResult Delete(int id)
+        {
+            bool result = shiftMaintainService.DelDepShiftTypeParameter(id);
+
+            if (result == true)
+            {
+                TempData["DelMessage"] = "刪除成功";
+            }
+
+            return View();
+        }
 
         [HttpPost]
         public JsonResult WorkHours(string startTime,string endTime)
